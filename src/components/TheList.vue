@@ -5,7 +5,6 @@
       <a @click.prevent="changeFilter('done', $event)">Done</a>
       <a @click.prevent="changeFilter('', $event)">All</a>
     </div>
-    <h2 class="title">List: To do</h2>
     <div class="list">
       <Task />
     </div>
@@ -35,11 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-bottom: 0.5rem;
-  color: rgba(0, 0, 0, 0.666);
-}
-
 .filter {
   margin: 0.5rem 0;
   a {

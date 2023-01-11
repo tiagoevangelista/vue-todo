@@ -21,9 +21,14 @@
         <h2 class="title" @click="task.isEditing = !task.isEditing">
           {{ task.title }}
         </h2>
-        <button class="btn-done" @click.prevent="finishTask(task.title)">
+        <button
+          v-if="!task.doneDate"
+          class="btn-done"
+          @click.prevent="finishTask(task.title)"
+        >
           ✔️
         </button>
+        <button v-else @click="task.isEditing = !task.isEditing">👁️</button>
       </div>
       <Transition mode="out-in">
         <div v-if="task.isEditing">
@@ -61,12 +66,18 @@ export default {
   },
   methods: {
     finishTask(payload) {
+      const date = new Date();
       const taskIndex = this.taskList
         .map(function (task) {
           return task.title;
         })
         .indexOf(payload);
       this.taskList[taskIndex].status = 'done';
+      this.taskList[taskIndex].doneDate = `${date.getFullYear()}-${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, 0)}-${date.getDay().toString().padStart(2, 0)}`;
     },
     deleteTask(payload) {
       if (
@@ -105,6 +116,7 @@ export default {
     line-height: 100%;
     padding-right: 4px;
     word-break: break-word;
+    cursor: pointer;
   }
 }
 
@@ -150,6 +162,8 @@ export default {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.5rem;
+  padding: 1.25rem 0.5rem;
+  opacity: 0.8;
+  color: #00303d;
 }
 </style>

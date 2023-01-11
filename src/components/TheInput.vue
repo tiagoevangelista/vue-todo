@@ -8,7 +8,7 @@
       />
       <button @click="addTask">Add task</button>
     </div>
-    <input type="datetime-local" />
+    <!-- <input type="datetime-local" /> -->
   </div>
 </template>
 
