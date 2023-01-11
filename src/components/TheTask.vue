@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <div
+    v-if="
+      taskList.filter((item) => {
+        return $store.state.filtering != ''
+          ? item.status == $store.state.filtering
+          : 'todo' || 'done';
+      }).length > 0
+    "
+  >
     <div
       class="task"
       v-for="(task, index) in taskList.filter((item) => {
@@ -39,6 +47,9 @@
       </Transition>
     </div>
   </div>
+  <div v-else class="empty-list">
+    Empty list <br />Create new task or change the filter
+  </div>
 </template>
 
 <script>
@@ -77,10 +88,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.task + .task {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.085);
+.task {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0.5rem 0 !important;
 }
 
 .task__info {
@@ -131,5 +144,12 @@ export default {
   background-color: #fd2f2f;
   font-weight: 600;
   color: #fff;
+}
+
+.empty-list {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem;
 }
 </style>

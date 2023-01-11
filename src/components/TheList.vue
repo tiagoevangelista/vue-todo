@@ -35,13 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: var(--radius);
-  padding: 1rem;
-}
-
 .title {
   margin-bottom: 0.5rem;
   color: rgba(0, 0, 0, 0.666);
@@ -60,6 +53,7 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.15);
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
 
     & + a {
       margin-left: 0.5rem;
@@ -76,5 +70,10 @@ export default {
       color: white;
     }
   }
+}
+
+.list {
+  overflow: auto;
+  max-height: 50vh;
 }
 </style>

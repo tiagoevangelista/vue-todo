@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <div class="toggle-light" @click="changeDarkMode">toggle lights</div>
     <Input />
     <List />
   </div>
@@ -14,6 +15,11 @@ export default {
   components: {
     Input,
     List,
+  },
+  methods: {
+    changeDarkMode() {
+      document.documentElement.classList.toggle('--dark-mode');
+    },
   },
 };
 </script>
@@ -34,15 +40,23 @@ export default {
   --radius: 0.333rem;
 }
 
-body,
 html {
   display: grid;
   justify-items: center;
-  padding-top: 4rem;
+  padding-top: 12vh;
   min-height: 100vh;
   font: 400 16px/1.3 var(--font-family);
   background-color: #f5fcff;
   color: rgba(0, 0, 0, 0.8);
+  transition: background-color 0.5s ease;
+}
+
+html.--dark-mode {
+  background: #0e303e;
+
+  .toggle-light {
+    color: #fff;
+  }
 }
 
 .v-enter-active,
@@ -88,6 +102,22 @@ button {
   }
 }
 
+.toggle-light {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
 .d-flex {
   display: flex;
 }
@@ -101,7 +131,11 @@ button {
 }
 
 .content {
-  width: 360px;
+  width: 400px;
   max-width: 100%;
+  padding: 8%;
+  border-radius: 14px;
+  min-height: 75vh;
+  background-color: #f5fcff;
 }
 </style>
